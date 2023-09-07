@@ -1,10 +1,13 @@
-<?
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // 獲取POST數據
-    $postData = $_POST;
-    
-    $challenge = $_POST["challenge"];
+<?php
 
-    return $challenge;
+$data = json_decode(file_get_contents('php://input'), true);
+if (isset($data["challenge"])) {
+    $message = [
+        "challenge" => $data["challenge"]
+    ];
+
+    header('Content-Type: application/json');
+    echo json_encode($message);
 }
+
 ?>
